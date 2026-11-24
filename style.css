@@ -1,0 +1,153 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Design tokens measured from https://warmtide.webflow.io/ at 1280px wide.
+   Big type uses clamp(min, fluid, max): it scales with the window
+   and stops at the min on phones and at the max on wide screens. */
+:root {
+  /* ---------- Colors ---------- */
+  --color-orange: #ec580e; /* page background, header, showreel */
+  --color-cream: #fff1b8; /* section backgrounds */
+  --color-ink: #1f120a; /* main text */
+  --color-burnt: #be470b; /* darker orange, text on cream */
+  --color-yellow: #ffd36b; /* small accents, status dot */
+  --color-white: #ffffff;
+  --color-ink-muted: rgba(31, 18, 10, 0.45); /* faded text */
+  --color-ink-line: rgba(31, 18, 10, 0.18); /* divider lines */
+
+  /* ---------- Font ---------- */
+  --font-sans: "Rubik", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+  --weight-black: 800;
+
+  /* ---------- Big type (size / line height / letter spacing) ---------- */
+  /* "warmtide" wordmark in the header: 275px at 1280 */
+  --text-wordmark: clamp(5rem, 21.5vw, 22rem);
+  --leading-wordmark: 0.87;
+  --tracking-wordmark: -0.06em;
+
+  /* "show reel" giant words: 154px at 1280 */
+  --text-showreel: clamp(4rem, 12vw, 11rem);
+  --leading-showreel: 0.85;
+  --tracking-showreel: -0.06em;
+
+  /* project titles in Selected work: 115px at 1280 */
+  --text-project: clamp(2.75rem, 9vw, 8rem);
+  --leading-project: 0.92;
+  --tracking-project: -0.045em;
+
+  /* About statement ("A small Lisbon studio..."): 92px at 1280 */
+  --text-statement: clamp(2.25rem, 7.2vw, 6.5rem);
+  --leading-statement: 1.14;
+  --tracking-statement: -0.03em;
+
+  /* section titles ("Selected work", "Services"): 88px at 1280 */
+  --text-section: clamp(2.875rem, 6.875vw, 6rem);
+  --leading-section: 1;
+  --tracking-section: -0.045em;
+
+  /* stat numbers (140+, 18, 9): 107px at 1280 */
+  --text-stat: clamp(3.5rem, 8.4vw, 7.5rem);
+  --leading-stat: 1;
+  --tracking-stat: -0.05em;
+
+  /* service names, UPPERCASE bold: 84px at 1280 */
+  --text-service: clamp(2rem, 6.5vw, 5.75rem);
+  --leading-service: 0.95;
+  --tracking-service: -0.03em;
+
+  /* footer call to action ("Let's make something warm together."): 77px at 1280 */
+  --text-cta: clamp(2.5rem, 6vw, 5.25rem);
+  --leading-cta: 1;
+  --tracking-cta: -0.045em;
+
+  /* ---------- Small type ---------- */
+  /* nav links, header tagline: 20px medium */
+  --text-lead: 1.25rem;
+  --leading-lead: 1.3;
+  --tracking-lead: -0.015em;
+
+  /* contact links: 18px medium */
+  --text-body-18: 1.125rem;
+  --leading-body-18: 1.3;
+
+  /* body text, buttons: 16px */
+  --text-body: 1rem;
+  --leading-body: 1.5;
+
+  /* labels like "(What we do)", project meta: 15px */
+  --text-small: 0.9375rem;
+  --leading-small: 1.5;
+
+  /* footer links, numbers like "(01)": 14px */
+  --text-caption: 0.875rem;
+  --leading-caption: 1.5;
+
+  /* ---------- Spacing ---------- */
+  --space-4: 0.25rem;
+  --space-8: 0.5rem;
+  --space-10: 0.625rem;
+  --space-12: 0.75rem;
+  --space-16: 1rem;
+  --space-20: 1.25rem;
+  --space-24: 1.5rem;
+  --space-28: 1.75rem;
+  --space-40: 2.5rem;
+  --space-48: 3rem;
+  --space-80: 5rem;
+  --space-96: 6rem;
+  --space-112: 7rem;
+  --space-120: 7.5rem;
+
+  /* ---------- Radius ---------- */
+  --radius-md: 16px;
+  --radius-lg: 28px; /* image frames */
+  --radius-pill: 999px; /* buttons, tags */
+
+  /* ---------- Focus ---------- */
+  --focus-ring: 2px solid var(--color-ink);
+  --focus-offset: 3px;
+
+  /* ---------- Page layout ---------- */
+  --page-gutter: 24px; /* left and right padding on every section */
+  --max-width: 1440px;
+
+  /* var() does not work inside media queries, so write
+     breakpoints as numbers: @media (max-width: 768px) { ... } */
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  font-weight: var(--weight-regular);
+  color: var(--color-ink);
+  background-color: var(--color-orange);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+/* ---------- Project styles go below ---------- */
