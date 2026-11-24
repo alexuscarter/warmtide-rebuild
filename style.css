@@ -380,6 +380,7 @@ ul {
   background-color: var(--color-orange);
   z-index: -1;
   border-radius: var(--radius-pill);
+  transition: transform 0.3s ease;
 }
 
 .button-cta-label-wrap {
@@ -412,11 +413,40 @@ ul {
   width: 22px;
   display: block;
   transform: rotate(-45deg); /* points up-right until hover */
+  transition: transform 0.3s ease;
+}
+
+.button-cta-label-track {
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.button-cta:hover .button-cta-disc {
+  transform: scale(12);
+}
+.button-cta:focus-visible .button-cta-disc {
+  transform: scale(12);
+}
+
+.button-cta:hover .button-cta-label-track {
+  transform: translateY(-50%);
+}
+.button-cta:focus-visible .button-cta-label-track {
+  transform: translateY(-50%);
+}
+.button-cta:hover .button-cta-arrow {
+  transform: rotate(0);
+}
+.button-cta:focus-visible .button-cta-arrow {
+  transform: rotate(0);
 }
 
 /* people who turn off animations get the swap without the slide */
 @media (prefers-reduced-motion: reduce) {
-  .link-roll-track {
+  .link-roll-track,
+  .button-cta-disc,
+  .button-cta-label-track,
+  .button-cta-arrow {
     transition: none;
   }
 }
