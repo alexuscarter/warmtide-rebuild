@@ -1,132 +1,105 @@
+/* =========================================================
+   Warmtide rebuild
+   1. Reset
+   2. Design tokens (values copied from the template's own CSS)
+   3. Base styles
+   4. Utility classes (one job each: size, weight, flex, gap...)
+   5. Components (header, sections...)
+   6. Responsive (991px tablet, 767px phone, same as the template)
+   ========================================================= */
+
+/* ---------- 1. Reset ---------- */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Design tokens measured from https://warmtide.webflow.io/ at 1280px wide.
-   Big type uses clamp(min, fluid, max): it scales with the window
-   and stops at the min on phones and at the max on wide screens. */
+/* ---------- 2. Design tokens ---------- */
 :root {
-  /* ---------- Colors ---------- */
-  --color-orange: #ec580e; /* page background, header, showreel */
-  --color-cream: #fff1b8; /* section backgrounds */
+  /* Colors */
   --color-ink: #1f120a; /* main text */
-  --color-burnt: #be470b; /* darker orange, text on cream */
-  --color-yellow: #ffd36b; /* small accents, status dot */
-  --color-white: #ffffff;
-  --color-ink-muted: rgba(31, 18, 10, 0.45); /* faded text */
-  --color-ink-line: rgba(31, 18, 10, 0.18); /* divider lines */
+  --color-orange: #ec580e; /* page background */
+  --color-orange-deep: #d9521a; /* hover / pressed orange */
+  --color-orange-text: #be470b; /* orange text on cream */
+  --color-cream: #fff1b8; /* wordmark, buttons, cream sections */
+  --color-yellow: #ffd36b; /* small accents */
+  --color-ink-soft: #1f120a2e; /* ink at 18%: divider lines */
+  --color-ink-strong: #1f120a73; /* ink at 45%: faded text */
+  --color-orange-line: #ec580e40; /* orange at 25%: lines on cream */
+  --color-orange-tint: #ec580e14; /* orange at 8%: light fills */
+  --color-cream-line: #fff1b873; /* cream at 45%: lines on orange */
 
-  /* ---------- Font ---------- */
-  --font-sans: "Rubik", system-ui, -apple-system, "Segoe UI", sans-serif;
-
+  /* Font */
+  --font-sans: "Rubik", sans-serif;
   --weight-regular: 400;
   --weight-medium: 500;
   --weight-bold: 700;
   --weight-black: 800;
 
-  /* ---------- Big type (size / line height / letter spacing) ---------- */
-  /* "warmtide" wordmark in the header: 275px at 1280 */
-  --text-wordmark: clamp(5rem, 21.5vw, 22rem);
-  --leading-wordmark: 0.87;
-  --tracking-wordmark: -0.06em;
+  /* Small text sizes (fixed px, same as the template) */
+  --text-caption: 14px;
+  --text-small: 15px;
+  --text-body: 16px;
+  --text-large: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 28px;
 
-  /* "show reel" giant words: 154px at 1280 */
-  --text-showreel: clamp(4rem, 12vw, 11rem);
-  --leading-showreel: 0.85;
-  --tracking-showreel: -0.06em;
+  /* Big display sizes: each one scales with the window (vw).
+     clamp(smallest, fluid, largest) */
+  --text-wordmark: 21.5vw; /* header "warmtide" (20.4vw on phones) */
+  --text-statement: clamp(32px, 7.67vw, 92px); /* About statement */
+  --text-stat: clamp(60px, 8.4vw, 132px); /* 140+, 18, 9 */
+  --text-display: clamp(46px, 7.33vw, 88px); /* "Selected work", "Services" */
+  --text-project: clamp(44px, 9vw, 156px); /* project titles */
+  --text-service: clamp(28px, 7vw, 84px); /* service names */
+  --text-showreel: 12vw; /* "show reel" (26vw on phones) */
+  --text-footer: clamp(
+    40px,
+    6vw,
+    88px
+  ); /* "Let's make something warm together." */
+  --text-footer-wordmark: clamp(64px, 20.6vw, 296px);
 
-  /* project titles in Selected work: 115px at 1280 */
-  --text-project: clamp(2.75rem, 9vw, 8rem);
-  --leading-project: 0.92;
-  --tracking-project: -0.045em;
+  /* Spacing (the template's scale; one-off values like 18px or 22px
+     are written straight into the component that uses them) */
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
 
-  /* About statement ("A small Lisbon studio..."): 92px at 1280 */
-  --text-statement: clamp(2.25rem, 7.2vw, 6.5rem);
-  --leading-statement: 1.14;
-  --tracking-statement: -0.03em;
+  /* Radius */
+  --radius-sm: 12px;
+  --radius-md: 16px; /* photos */
+  --radius-lg: 24px;
+  --radius-card: 28px; /* cards */
+  --radius-pill: 999px; /* buttons, dots */
 
-  /* section titles ("Selected work", "Services"): 88px at 1280 */
-  --text-section: clamp(2.875rem, 6.875vw, 6rem);
-  --leading-section: 1;
-  --tracking-section: -0.045em;
+  /* Layout */
+  --page-padding: 24px; /* left and right edge of every section */
+  --page-padding-mobile: 16px;
+  --section-padding: 96px;
+  --section-padding-large: 120px;
+  --max-width: 1440px;
 
-  /* stat numbers (140+, 18, 9): 107px at 1280 */
-  --text-stat: clamp(3.5rem, 8.4vw, 7.5rem);
-  --leading-stat: 1;
-  --tracking-stat: -0.05em;
-
-  /* service names, UPPERCASE bold: 84px at 1280 */
-  --text-service: clamp(2rem, 6.5vw, 5.75rem);
-  --leading-service: 0.95;
-  --tracking-service: -0.03em;
-
-  /* footer call to action ("Let's make something warm together."): 77px at 1280 */
-  --text-cta: clamp(2.5rem, 6vw, 5.25rem);
-  --leading-cta: 1;
-  --tracking-cta: -0.045em;
-
-  /* ---------- Small type ---------- */
-  /* nav links, header tagline: 20px medium */
-  --text-lead: 1.25rem;
-  --leading-lead: 1.3;
-  --tracking-lead: -0.015em;
-
-  /* contact links: 18px medium */
-  --text-body-18: 1.125rem;
-  --leading-body-18: 1.3;
-
-  /* body text, buttons: 16px */
-  --text-body: 1rem;
-  --leading-body: 1.5;
-
-  /* labels like "(What we do)", project meta: 15px */
-  --text-small: 0.9375rem;
-  --leading-small: 1.5;
-
-  /* footer links, numbers like "(01)": 14px */
-  --text-caption: 0.875rem;
-  --leading-caption: 1.5;
-
-  /* ---------- Spacing ---------- */
-  --space-4: 0.25rem;
-  --space-8: 0.5rem;
-  --space-10: 0.625rem;
-  --space-12: 0.75rem;
-  --space-16: 1rem;
-  --space-20: 1.25rem;
-  --space-24: 1.5rem;
-  --space-28: 1.75rem;
-  --space-40: 2.5rem;
-  --space-48: 3rem;
-  --space-80: 5rem;
-  --space-96: 6rem;
-  --space-112: 7rem;
-  --space-120: 7.5rem;
-
-  /* ---------- Radius ---------- */
-  --radius-md: 16px;
-  --radius-lg: 28px; /* image frames */
-  --radius-pill: 999px; /* buttons, tags */
-
-  /* ---------- Focus ---------- */
+  /* Focus */
   --focus-ring: 2px solid var(--color-ink);
   --focus-offset: 3px;
 
-  /* ---------- Page layout ---------- */
-  --page-gutter: 24px; /* left and right padding on every section */
-  --max-width: 1440px;
-
-  /* var() does not work inside media queries, so write
-     breakpoints as numbers: @media (max-width: 768px) { ... } */
+  /* var() does not work inside media queries, so the breakpoints
+     are written as numbers: 991px (tablet) and 767px (phone). */
 }
 
+/* ---------- 3. Base styles ---------- */
 body {
   font-family: var(--font-sans);
   font-size: var(--text-body);
-  line-height: var(--leading-body);
-  font-weight: var(--weight-regular);
+  line-height: 1.5;
   color: var(--color-ink);
   background-color: var(--color-orange);
 }
@@ -137,8 +110,8 @@ img {
 }
 
 a {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }
 
 ul {
@@ -150,4 +123,279 @@ ul {
   outline-offset: var(--focus-offset);
 }
 
-/* ---------- Project styles go below ---------- */
+/* ---------- 4. Utility classes ----------
+   Small classes that each do one thing. Stack them in the HTML:
+   <p class="text-size-large text-weight-medium">  */
+
+/* Text size (each size carries its own line height and letter spacing) */
+.text-size-tiny {
+  font-size: var(--text-caption);
+  line-height: 1.5;
+}
+.text-size-small {
+  font-size: var(--text-small);
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+}
+.text-size-regular {
+  font-size: var(--text-body);
+  line-height: 1.5;
+}
+.text-size-medium {
+  font-size: var(--text-large);
+  line-height: 1.3;
+}
+.text-size-large {
+  font-size: var(--text-xl);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+/* Text weight */
+.text-weight-regular {
+  font-weight: var(--weight-regular);
+}
+.text-weight-medium {
+  font-weight: var(--weight-medium);
+}
+.text-weight-bold {
+  font-weight: var(--weight-bold);
+}
+.text-weight-black {
+  font-weight: var(--weight-black);
+}
+
+/* Text color */
+.text-color-ink {
+  color: var(--color-ink);
+}
+.text-color-cream {
+  color: var(--color-cream);
+}
+.text-color-orange {
+  color: var(--color-orange-text);
+}
+.text-color-yellow {
+  color: var(--color-yellow);
+}
+
+/* Flex */
+.flex {
+  display: flex;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.flex-1 {
+  flex: 1 1 0;
+}
+.items-start {
+  align-items: flex-start;
+}
+.items-center {
+  align-items: center;
+}
+.items-end {
+  align-items: flex-end;
+}
+.justify-between {
+  justify-content: space-between;
+}
+
+/* Gap */
+.gap-8 {
+  gap: var(--space-8);
+}
+.gap-12 {
+  gap: var(--space-12);
+}
+.gap-16 {
+  gap: var(--space-16);
+}
+.gap-24 {
+  gap: var(--space-24);
+}
+.gap-48 {
+  gap: var(--space-48);
+}
+
+/* Page padding: the 24px left and right edge */
+.padding-global {
+  padding-left: var(--page-padding);
+  padding-right: var(--page-padding);
+}
+
+/* ---------- 5. Components ---------- */
+
+/* overflow: clip stops wide content from causing sideways scroll.
+   Unlike overflow: hidden, it doesn't break position: sticky. */
+.page-wrapper {
+  overflow: clip;
+}
+
+/* Header (intro)
+   .intro is 2.5 screens tall to make scroll room.
+   .intro-stage is one screen tall and sticks to the top while you
+   scroll through that room. The scroll animation comes later. */
+.intro {
+  position: relative;
+  height: 250vh;
+}
+
+.intro-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Photo layer, behind everything. It starts below the info row:
+   140px + 18.8vw keeps that gap right at every window width. */
+.intro-reveal {
+  position: absolute;
+  z-index: 0;
+  inset: calc(140px + 18.8vw) var(--page-padding) var(--page-padding);
+  border-radius: var(--radius-md);
+  overflow: hidden; /* clips the photo to the rounded corners */
+}
+
+.intro-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0%; /* keep the top of the photo in view */
+}
+
+/* Wordmark layer */
+.intro-top {
+  position: relative;
+  z-index: 1;
+  padding-top: 18px;
+}
+
+.intro-wordmark {
+  font-size: var(--text-wordmark);
+  line-height: 0.87;
+  letter-spacing: -0.06em;
+  font-weight: var(--weight-black);
+  color: var(--color-cream);
+  white-space: nowrap;
+}
+
+/* Info row layer */
+.intro-media {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-24);
+}
+
+.intro-menu {
+  gap: 22px; /* one-off value from the template */
+}
+
+.intro-menu a {
+  line-height: 1.3; /* the template's links are 26px tall, not 24 */
+}
+
+.status-row {
+  gap: 10px; /* one-off value from the template */
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-cream);
+}
+
+.link-roll-mask {
+  display: block;
+  height: 1.3em;
+  overflow: hidden;
+}
+
+.link-roll-label {
+  display: block;
+}
+
+/* the track holds two labels, so it's two lines tall.
+   The transition lives here (not in :hover) so it animates
+   both up and back down. */
+.link-roll-track {
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* hover the link (it stays still), move the track inside it.
+   -50% of the track = exactly one label. */
+.intro-menu-link:hover .link-roll-track,
+.intro-menu-link:focus-visible .link-roll-track {
+  transform: translateY(-50%);
+}
+
+/* people who turn off animations get the swap without the slide */
+@media (prefers-reduced-motion: reduce) {
+  .link-roll-track {
+    transition: none;
+  }
+}
+
+/* ---------- 6. Responsive ---------- */
+
+/* Tablet */
+@media (max-width: 991px) {
+  .intro-info {
+    gap: var(--space-24);
+  }
+  .intro-info .text-size-large {
+    font-size: 19px;
+  }
+}
+
+/* Phone: no sticky stage, the photo moves below the text */
+@media (max-width: 767px) {
+  .padding-global {
+    padding-left: var(--page-padding-mobile);
+    padding-right: var(--page-padding-mobile);
+  }
+
+  .intro {
+    height: auto;
+  }
+  .intro-stage {
+    position: relative;
+    height: auto;
+    overflow: visible;
+  }
+  .intro-reveal {
+    position: relative;
+    inset: 0;
+    order: 3;
+    height: 72svh;
+    margin: 0 var(--page-padding-mobile) var(--space-16);
+  }
+  .intro-photo {
+    object-position: 74% 0%;
+  }
+  .intro-wordmark {
+    font-size: 20.4vw;
+  }
+  .intro-media {
+    flex-grow: 0;
+  }
+  .intro-info {
+    flex-direction: column;
+    gap: 18px;
+  }
+  .intro-info .is-status {
+    align-items: flex-start;
+  }
+  .intro-info .text-size-large {
+    font-size: 18px;
+  }
+}

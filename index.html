@@ -13,6 +13,126 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="page-wrapper">
+      <header class="intro">
+        <div class="intro-stage">
+          <!-- photo layer (behind) -->
+          <div class="intro-reveal">
+            <!-- TODO: swap for your own Unsplash photo; this one belongs to the template -->
+            <img
+              class="intro-photo"
+              src="https://cdn.prod.website-files.com/6aeff7d60020eedda51c75a3/6af0a7786e4859726e1324c8_warmtide-hero.webp"
+              alt="Woman in a cream sweater smiling with her eyes closed"
+            />
+          </div>
+
+          <!-- wordmark layer -->
+          <div class="intro-top padding-global">
+            <h1 class="intro-wordmark">warmtide</h1>
+          </div>
+
+          <!-- info row layer -->
+          <div class="intro-media padding-global">
+            <div class="intro-info flex gap-48">
+              <div class="flex-column flex-1 items-start gap-8">
+                <p class="text-size-small">(What we do)</p>
+                <p class="text-size-large text-weight-medium">
+                  Branding, websites, motion &amp; art direction
+                </p>
+              </div>
+
+              <div class="flex-column flex-1 items-start gap-8">
+                <p class="text-size-small" id="menu-label">(Menu)</p>
+                <nav aria-labelledby="menu-label">
+                  <ul class="intro-menu flex">
+                    <!-- roll link: the mask shows one line, the track holds
+                         the word twice and slides up on hover -->
+                    <li>
+                      <a
+                        class="intro-menu-link text-size-large text-weight-medium text-color-cream"
+                        href="#work"
+                      >
+                        <span class="link-roll-mask">
+                          <span class="link-roll-track">
+                            <span class="link-roll-label">Work</span>
+                            <span
+                              class="link-roll-label text-color-yellow"
+                              aria-hidden="true"
+                              >Work</span
+                            >
+                          </span>
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        class="intro-menu-link text-size-large text-weight-medium text-color-cream"
+                        href="#services"
+                      >
+                        <span class="link-roll-mask">
+                          <span class="link-roll-track">
+                            <span class="link-roll-label">Services</span>
+                            <span
+                              class="link-roll-label text-color-yellow"
+                              aria-hidden="true"
+                              >Services</span
+                            >
+                          </span>
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        class="intro-menu-link text-size-large text-weight-medium text-color-cream"
+                        href="#studio"
+                      >
+                        <span class="link-roll-mask">
+                          <span class="link-roll-track">
+                            <span class="link-roll-label">Studio</span>
+                            <span
+                              class="link-roll-label text-color-yellow"
+                              aria-hidden="true"
+                              >Studio</span
+                            >
+                          </span>
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        class="intro-menu-link text-size-large text-weight-medium text-color-cream"
+                        href="#contact"
+                      >
+                        <span class="link-roll-mask">
+                          <span class="link-roll-track">
+                            <span class="link-roll-label">Contact</span>
+                            <span
+                              class="link-roll-label text-color-yellow"
+                              aria-hidden="true"
+                              >Contact</span
+                            >
+                          </span>
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+
+              <div class="is-status flex-column flex-1 items-end gap-8">
+                <p class="text-size-small">(Status)</p>
+                <div class="status-row flex items-center">
+                  <span class="status-dot" aria-hidden="true"></span>
+                  <p class="text-size-large text-weight-medium">
+                    Booking projects for Q1 2027
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
