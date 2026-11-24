@@ -338,6 +338,82 @@ ul {
   transform: translateY(-50%);
 }
 
+.intro-info {
+  position: relative;
+}
+
+/* in the header, the button sits 48px below the info row, over the photo.
+   Two classes beat .button-cta's position: relative below. */
+.intro-info .button-cta {
+  position: absolute;
+  top: calc(100% + 48px);
+  left: var(--page-padding);
+}
+
+/* ---------- Button: Start a project ----------
+   isolation: isolate keeps the disc's z-index: -1 behind the label
+   and arrow but still in front of the button's own background. */
+.button-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  height: 60px;
+  padding: 0 6px 0 26px;
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-body);
+  font-weight: var(--weight-medium);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.button-cta-disc {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  height: 48px;
+  width: 48px;
+  background-color: var(--color-orange);
+  z-index: -1;
+  border-radius: var(--radius-pill);
+}
+
+.button-cta-label-wrap {
+  overflow: hidden;
+  display: block;
+  height: 1.2em;
+  line-height: 1.2em;
+}
+
+.button-cta-label {
+  display: block;
+}
+
+.button-cta-label.is-alt {
+  color: var(--color-cream);
+}
+
+/* 48px box that centers the arrow; the svg uses currentColor */
+.button-cta-icon {
+  height: 48px;
+  width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-cream);
+}
+
+.button-cta-arrow {
+  height: 22px;
+  width: 22px;
+  display: block;
+  transform: rotate(-45deg); /* points up-right until hover */
+}
+
 /* people who turn off animations get the swap without the slide */
 @media (prefers-reduced-motion: reduce) {
   .link-roll-track {
