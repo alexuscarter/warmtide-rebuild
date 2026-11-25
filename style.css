@@ -441,6 +441,116 @@ ul {
   transform: rotate(0);
 }
 
+/* ---------- About section ----------
+   Side padding comes from .padding-global in the HTML. */
+.section-about {
+  padding-top: var(--section-padding-large); /* 120 */
+  padding-bottom: 80px; /* one-off value from the template */
+  background-color: var(--color-cream);
+}
+
+.about-content {
+  gap: 36px; /* one-off value from the template */
+}
+
+/* the big sentence */
+.about-statement {
+  font-size: var(--text-statement);
+  line-height: 1.14;
+  letter-spacing: -0.03em;
+  font-weight: var(--weight-regular);
+  color: var(--color-orange);
+}
+
+/* em = relative to the statement's font size, so pills and shapes
+   shrink with the text on smaller screens */
+.about-pill {
+  display: inline-block;
+  width: 1.9em;
+  height: 0.84em;
+  margin-right: 0.26em;
+  vertical-align: -0.1em; /* nudge down to sit on the text's baseline */
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.about-pill img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-shape {
+  display: inline-block;
+  width: 0.74em;
+  height: 0.74em;
+  margin-right: 0.26em;
+  vertical-align: -0.06em;
+}
+
+/* an empty span that forces a new line (turned off on phones) */
+.about-break {
+  display: block;
+  width: 100%;
+  height: 0;
+}
+
+/* SVGs fill whatever box holds them */
+.about-shape svg,
+.stat-shape svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* stat cards */
+.stats-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-16);
+  margin-top: var(--space-20);
+}
+
+/* orange is the default card; .is-ink and .is-yellow are variants */
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 320px;
+  padding: 28px;
+  border-radius: var(--radius-card);
+  background-color: var(--color-orange);
+  color: var(--color-ink);
+  overflow: hidden;
+}
+
+.stat-card.is-ink {
+  background-color: var(--color-ink);
+  color: var(--color-cream);
+}
+
+.stat-card.is-yellow {
+  background-color: var(--color-yellow);
+}
+
+.stat-shape {
+  display: block;
+  width: 52px;
+  height: 52px;
+}
+
+.stat-card-bottom {
+  gap: 10px; /* one-off value from the template */
+}
+
+.stat-number {
+  font-size: var(--text-stat);
+  font-weight: var(--weight-black);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
 /* people who turn off animations get the swap without the slide */
 @media (prefers-reduced-motion: reduce) {
   .link-roll-track,
@@ -460,6 +570,10 @@ ul {
   }
   .intro-info .text-size-large {
     font-size: 19px;
+  }
+
+  .section-about {
+    padding-top: var(--section-padding);
   }
 }
 
@@ -503,5 +617,22 @@ ul {
   }
   .intro-info .text-size-large {
     font-size: 18px;
+  }
+
+  /* About: forced line breaks off, cards stack */
+  .section-about {
+    padding-top: 80px;
+    padding-bottom: 64px;
+  }
+  .about-break {
+    display: inline;
+    width: auto;
+    height: auto;
+  }
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .stat-card {
+    min-height: 240px;
   }
 }
