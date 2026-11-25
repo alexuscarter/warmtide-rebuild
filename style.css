@@ -551,6 +551,149 @@ ul {
   letter-spacing: -0.05em;
 }
 
+/* ---------- Selected work ----------
+   Each .work-item is one screen tall and sticks to the top, so the
+   next panel slides over it. Inside, three absolute layers fill the
+   panel: photo, gradient, content. */
+.section-work {
+  padding-top: var(--section-padding); /* 96 */
+  background-color: var(--color-cream);
+}
+
+.work-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  column-gap: var(--space-24);
+  row-gap: var(--space-20);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-bottom: var(--space-48);
+}
+
+/* section titles ("Selected work", "Services") */
+.heading-display {
+  font-size: var(--text-display);
+  line-height: 1;
+  letter-spacing: -0.045em;
+  font-weight: var(--weight-medium);
+  color: var(--color-orange);
+}
+
+/* button variant: orange pill, ink disc (the hover rules
+   from the header button already apply) */
+.button-cta.is-orange {
+  background-color: var(--color-orange);
+  color: var(--color-ink);
+  box-shadow: 0 14px 34px rgba(242, 102, 31, 0.28);
+}
+
+.button-cta-disc.is-ink {
+  background-color: var(--color-ink);
+}
+
+/* one project panel */
+.work-item {
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+}
+
+.work-panel {
+  display: block;
+  color: var(--color-cream);
+  height: 100vh;
+  position: relative;
+}
+
+.work-panel-inner {
+  position: absolute;
+  inset: 0;
+}
+
+.work-panel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* dark at the top, clear by 75% down, so the cream text stays readable */
+.work-panel-gradient {
+  background-image: linear-gradient(
+    rgba(31, 18, 10, 0.58) 0%,
+    rgba(31, 18, 10, 0.3) 32%,
+    rgba(31, 18, 10, 0.06) 58%,
+    rgba(31, 18, 10, 0) 75%
+  );
+  pointer-events: none; /* clicks pass through to the link */
+  position: absolute;
+  inset: 0;
+}
+
+.work-panel-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-40);
+  /* absolute + left AND right = stretch between them, 28px each side */
+  position: absolute;
+  top: 108px;
+  left: 28px;
+  right: 28px;
+}
+
+.work-panel-text {
+  /* take the leftover width; min-width: 0 lets long titles shrink */
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.work-panel-meta {
+  display: flex;
+  gap: var(--space-8);
+  margin-bottom: 18px; /* one-off value from the template */
+  opacity: 0.85;
+}
+
+.work-panel-title {
+  font-size: var(--text-project);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  font-weight: var(--weight-medium);
+  color: var(--color-cream);
+}
+
+/* "View project" pill */
+.work-panel-cta {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* one-off value from the template */
+  padding: var(--space-12) var(--space-12) var(--space-12) var(--space-20);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-orange);
+  color: var(--color-ink);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  flex-shrink: 0; /* never squished by a long title */
+}
+
+.work-panel-cta-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-cream);
+  color: var(--color-orange);
+  transform: rotate(-45deg); /* arrow points up-right */
+}
+
 /* people who turn off animations get the swap without the slide */
 @media (prefers-reduced-motion: reduce) {
   .link-roll-track,
@@ -634,5 +777,59 @@ ul {
   }
   .stat-card {
     min-height: 240px;
+  }
+
+  .section-work {
+    padding-top: 72px;
+    padding-bottom: var(--space-16);
+  }
+
+  .work-head {
+    padding-bottom: 32px;
+  }
+
+  /* stacking turns off: cards sit one after another */
+  .work-item {
+    height: auto;
+    position: relative;
+    overflow: visible;
+  }
+
+  .work-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+    padding: 0 var(--page-padding-mobile);
+  }
+
+  /* shorter, rounded cards */
+  .work-panel {
+    height: 72svh;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  /* text moves to the bottom of the card, title above the button */
+  .work-panel-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    inset: auto 18px 18px;
+  }
+
+  .work-panel-meta {
+    margin-bottom: 10px;
+  }
+
+  /* gradient flips: dark at the bottom, covering the lower 62% */
+  .work-panel-gradient {
+    background-image: linear-gradient(
+      0deg,
+      rgba(31, 18, 10, 0.62),
+      rgba(31, 18, 10, 0.22) 55%,
+      rgba(31, 18, 10, 0)
+    );
+    top: auto;
+    height: 62%;
   }
 }
