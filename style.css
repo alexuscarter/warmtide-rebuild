@@ -694,12 +694,133 @@ ul {
   transform: rotate(-45deg); /* arrow points up-right */
 }
 
+/* ---------- Services ----------
+   Six full-width rows. Each row has two layers: .service-fill (the
+   orange background, hidden with scaleY(0)) and .service-inner (the
+   content, on top). Hover grows the fill up from the bottom. */
+.section-services {
+  position: relative;
+  padding-top: 112px; /* one-off value from the template */
+  padding-bottom: 112px;
+  background-color: var(--color-cream);
+  color: var(--color-orange);
+}
+
+.services-head {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-bottom: var(--space-48);
+}
+
+.services-label-row {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* one-off value from the template */
+  margin-bottom: 18px; /* one-off value from the template */
+}
+
+.services-star {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  color: var(--color-orange);
+}
+
+/* lines: one on top of every row, plus one under the last */
+.services-list {
+  list-style: none;
+  border-bottom: 1.5px solid var(--color-orange);
+}
+
+.service-row {
+  position: relative; /* the fill is positioned from here */
+  overflow: hidden;
+  border-top: 1.5px solid var(--color-orange);
+  color: var(--color-orange-text);
+  transition: color 0.4s ease;
+}
+
+/* covers the whole row; scaleY(0) squashes it to nothing.
+   transform-origin: bottom makes it grow upward */
+.service-fill {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-orange);
+  transform: scaleY(0);
+  transform-origin: 50% 100%;
+  pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* number | title | note | icon */
+.service-inner {
+  position: relative; /* sits above the absolute fill */
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 64px 1fr 260px 56px;
+  align-items: center;
+  column-gap: var(--space-24);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-top: 22px; /* one-off value from the template */
+  padding-bottom: 22px;
+}
+
+/* the text inherits the row's color, so one color change on hover
+   turns everything cream */
+.service-index {
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+}
+
+.service-title {
+  font-size: var(--text-service);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  transition: transform 0.4s ease;
+}
+
+.service-note {
+  font-size: var(--text-body);
+  line-height: 1.35;
+}
+
+.service-icon {
+  justify-self: end;
+  width: 48px;
+  height: 48px;
+  transition: transform 0.4s ease;
+}
+
+/* HOVER: only on screens with a real mouse, and only desktop widths
+   (the template turns it off on phones) */
+@media (hover: hover) and (min-width: 768px) {
+  .service-row:hover {
+    color: var(--color-cream);
+  }
+  .service-row:hover .service-fill {
+    transform: scaleY(1);
+  }
+  .service-row:hover .service-title {
+    transform: translateX(18px);
+  }
+  .service-row:hover .service-icon {
+    transform: rotate(90deg);
+  }
+}
+
 /* people who turn off animations get the swap without the slide */
 @media (prefers-reduced-motion: reduce) {
   .link-roll-track,
   .button-cta-disc,
   .button-cta-label-track,
-  .button-cta-arrow {
+  .button-cta-arrow,
+  .service-row,
+  .service-fill,
+  .service-title,
+  .service-icon {
     transition: none;
   }
 }
@@ -831,5 +952,27 @@ ul {
     );
     top: auto;
     height: 62%;
+  }
+
+  /* Services: number | title | icon, the note hides */
+  .section-services {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+  .services-head {
+    padding-bottom: 32px;
+  }
+  .service-inner {
+    grid-template-columns: 32px 1fr 28px;
+    column-gap: var(--space-12);
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+  .service-note {
+    display: none;
+  }
+  .service-icon {
+    width: 28px;
+    height: 28px;
   }
 }
